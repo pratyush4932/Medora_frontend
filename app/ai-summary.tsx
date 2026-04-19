@@ -10,6 +10,7 @@ export default function AiSummaryScreen() {
     <SafeAreaView style={styles.container} edges={['left', 'right']}>
       <TopAppBar title="AI Health Summary" showBack showAvatar />
 
+
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* Actions */}
         <TouchableOpacity style={styles.viewFileButton} activeOpacity={0.8}>
