@@ -11,6 +11,7 @@ interface ShareModalProps {
   onClose: () => void;
 }
 
+
 export function ShareModal({ visible, onClose }: ShareModalProps) {
   const insets = useSafeAreaInsets();
 
@@ -24,7 +25,7 @@ export function ShareModal({ visible, onClose }: ShareModalProps) {
       <TouchableWithoutFeedback onPress={onClose}>
         <View style={styles.overlay}>
           <BlurView intensity={20} tint="dark" style={StyleSheet.absoluteFill} />
-          
+
           <TouchableWithoutFeedback>
             <View style={[styles.sheet, { paddingBottom: insets.bottom || 24 }]}>
               <View style={styles.header}>
