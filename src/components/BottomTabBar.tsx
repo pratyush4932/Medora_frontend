@@ -39,12 +39,36 @@ export function BottomTabBar({ state, descriptors, navigation }: BottomTabBarPro
           };
 
           let iconName: keyof typeof MaterialIcons.glyphMap = 'home';
-          if (route.name === 'records') iconName = 'folder';
+          if (route.name === 'upload') iconName = 'add';
           else if (route.name === 'hospital') iconName = 'local-hospital';
+
+          const isCenter = route.name === 'upload';
 
           // Center prominent Add button (if we wanted to make the middle one an add button instead of records)
           // For now, based on my_records_folders, it's Home, Records, Hospital
           
+          return (
+          if (isCenter) {
+            return (
+              <TouchableOpacity
+                key={route.key}
+                onPress={onPress}
+                activeOpacity={0.8}
+                style={styles.centerTabContainer}
+              >
+                <LinearGradient
+                  colors={[Colors.primary, '#2ea5a5']}
+                  style={styles.centerTabButton}
+                >
+                  <MaterialIcons name="add" size={32} color={Colors.onPrimary} />
+                </LinearGradient>
+                <Text style={[styles.tabLabel, { color: Colors.primary, marginTop: 8 }]}>
+                  {label as string}
+                </Text>
+              </TouchableOpacity>
+            );
+          }
+
           return (
             <TouchableOpacity
               key={route.key}
@@ -108,5 +132,22 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter_500Medium',
     fontSize: 11,
     marginTop: 4,
+  },
+  centerTabContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: -32, // Lift it up
+  },
+  centerTabButton: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: Colors.primary,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.3,
+    shadowRadius: 16,
+    elevation: 8,
   },
 });

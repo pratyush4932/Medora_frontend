@@ -17,8 +17,30 @@ export default function RecordsScreen() {
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.title}>Records</Text>
-          <Text style={styles.subtitle}>Your clinical narrative, curated and secured with fintech-grade precision.</Text>
+          <Text style={styles.title}>Upload</Text>
+          <Text style={styles.subtitle}>Digitize your health records with one tap. Secure, indexed, and always available.</Text>
+        </View>
+
+        {/* Quick Upload Actions */}
+        <View style={styles.quickUploadGrid}>
+          <TouchableOpacity 
+            style={[styles.uploadCard, { backgroundColor: Colors.primary }]}
+            onPress={() => router.push('/scanner')}
+          >
+            <View style={styles.uploadIconContainer}>
+              <MaterialIcons name="camera-alt" size={32} color={Colors.onPrimary} />
+            </View>
+            <Text style={styles.uploadTitle}>Scan Document</Text>
+            <Text style={[styles.uploadDesc, { color: Colors.onPrimary, opacity: 0.9 }]}>Use camera to scan</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.uploadCard}>
+            <View style={[styles.uploadIconContainer, { backgroundColor: 'rgba(0, 103, 103, 0.1)' }]}>
+              <MaterialIcons name="upload-file" size={32} color={Colors.primary} />
+            </View>
+            <Text style={[styles.uploadTitle, { color: Colors.onSurface }]}>Choose File</Text>
+            <Text style={styles.uploadDesc}>Upload from device</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Filters */}
@@ -138,7 +160,44 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   header: {
-    marginBottom: 32,
+    marginBottom: 24,
+  },
+  quickUploadGrid: {
+    flexDirection: 'row',
+    gap: 16,
+    marginBottom: 40,
+  },
+  uploadCard: {
+    flex: 1,
+    backgroundColor: Colors.surfaceContainerLowest,
+    borderRadius: 24,
+    padding: 20,
+    alignItems: 'center',
+    gap: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.05,
+    shadowRadius: 12,
+    elevation: 2,
+  },
+  uploadIconContainer: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 8,
+  },
+  uploadTitle: {
+    fontFamily: 'Inter_700Bold',
+    fontSize: 15,
+    color: Colors.onPrimary,
+  },
+  uploadDesc: {
+    fontFamily: 'Inter_500Medium',
+    fontSize: 11,
+    color: Colors.onSurfaceVariant,
+    opacity: 0.8,
   },
   title: {
     fontFamily: 'Manrope_800ExtraBold',

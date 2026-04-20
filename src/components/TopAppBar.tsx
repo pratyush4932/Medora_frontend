@@ -57,8 +57,8 @@ export function TopAppBar({
             </TouchableOpacity>
           )}
           {rightAction === 'close' && (
-            <TouchableOpacity style={styles.iconButton} onPress={onRightPress}>
-              <MaterialIcons name="close" size={24} color={Colors.onSurfaceVariant} />
+            <TouchableOpacity style={[styles.iconButton, { backgroundColor: 'rgba(0,0,0,0.4)', borderRadius: 8, padding: 4 }]} onPress={onRightPress}>
+              <MaterialIcons name="close" size={20} color="#fff" />
             </TouchableOpacity>
           )}
           {rightAction === 'notifications' && showAvatar && showBack && (

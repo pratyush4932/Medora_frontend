@@ -32,12 +32,12 @@ export default function DashboardScreen() {
             <TouchableOpacity 
               style={styles.actionCard} 
               activeOpacity={0.8}
-              onPress={() => router.push('/(tabs)/records')}
+              onPress={() => router.push('/(tabs)/upload')}
             >
               <View style={styles.actionIconContainer}>
-                <MaterialIcons name="folder-shared" size={24} color={Colors.primary} />
+                <MaterialIcons name="add-circle" size={24} color={Colors.primary} />
               </View>
-              <Text style={styles.actionLabel}>Records</Text>
+              <Text style={styles.actionLabel}>Upload</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
@@ -137,7 +137,7 @@ export default function DashboardScreen() {
         {/* Recent Records */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Recent Records</Text>
-          <TouchableOpacity onPress={() => router.push('/(tabs)/records')}>
+          <TouchableOpacity onPress={() => router.push('/(tabs)/upload')}>
             <Text style={styles.sectionAction}>View Full Archive</Text>
           </TouchableOpacity>
         </View>
