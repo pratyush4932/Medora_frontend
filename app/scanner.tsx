@@ -12,8 +12,9 @@ import Animated, {
   withTiming, 
   Easing 
 } from 'react-native-reanimated';
+import { moderateScale, verticalScale } from '../src/utils/scaling';
 
-const SCANNER_SIZE = 280;
+const SCANNER_SIZE = moderateScale(280);
 
 export default function ScannerScreen() {
   const insets = useSafeAreaInsets();
@@ -61,7 +62,7 @@ export default function ScannerScreen() {
           </View>
           
           <View style={styles.instructionBadge}>
-            <MaterialIcons name="qr-code-scanner" size={18} color="#fff" />
+            <MaterialIcons name="qr-code-scanner" size={moderateScale(18)} color="#fff" />
             <Text style={styles.instructionText}>Align record within frame</Text>
           </View>
         </View>
@@ -76,7 +77,7 @@ export default function ScannerScreen() {
       />
 
       {/* Floating Status & Details Card */}
-      <View style={[styles.bottomContainer, { paddingBottom: insets.bottom + 100 }]}>
+      <View style={[styles.bottomContainer, { paddingBottom: insets.bottom + verticalScale(100) }]}>
         <View style={styles.detailsSurface}>
           <View style={styles.statusBadge}>
             <View style={styles.statusDot} />
@@ -88,20 +89,20 @@ export default function ScannerScreen() {
           </Text>
           
           <View style={styles.securityRow}>
-            <MaterialIcons name="verified-user" size={14} color={Colors.primary} />
+            <MaterialIcons name="verified-user" size={moderateScale(14)} color={Colors.primary} />
             <Text style={styles.securityText}>HIPAA COMPLIANT ENCRYPTION</Text>
           </View>
         </View>
       </View>
 
       {/* Bottom Nav Actions Bar */}
-      <View style={[styles.bottomNav, { paddingBottom: insets.bottom || 24 }]}>
+      <View style={[styles.bottomNav, { paddingBottom: insets.bottom || verticalScale(24) }]}>
         <TouchableOpacity 
           style={styles.navAction} 
           onPress={() => {}}
           activeOpacity={0.7}
         >
-          <MaterialIcons name="photo-library" size={26} color={Colors.onSurfaceVariant} />
+          <MaterialIcons name="photo-library" size={moderateScale(26)} color={Colors.onSurfaceVariant} />
           <Text style={styles.navLabel}>GALLERY</Text>
         </TouchableOpacity>
 
@@ -120,7 +121,7 @@ export default function ScannerScreen() {
           onPress={() => router.push('/ai-summary')}
           activeOpacity={0.7}
         >
-          <MaterialIcons name="auto-awesome" size={26} color={Colors.primary} />
+          <MaterialIcons name="auto-awesome" size={moderateScale(26)} color={Colors.primary} />
           <Text style={[styles.navLabel, { color: Colors.primary }]}>ANALYZE</Text>
         </TouchableOpacity>
       </View>
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.3)',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 120,
+    paddingBottom: verticalScale(120),
   },
   scannerFrame: {
     width: SCANNER_SIZE,
@@ -153,111 +154,111 @@ const styles = StyleSheet.create({
   },
   scanLine: {
     width: '100%',
-    height: 3,
+    height: verticalScale(3),
     backgroundColor: Colors.primary,
   },
   corner: {
     position: 'absolute',
-    width: 24,
-    height: 24,
+    width: moderateScale(24),
+    height: moderateScale(24),
     borderColor: Colors.primary,
   },
   topLeft: {
-    top: -2,
-    left: -2,
+    top: moderateScale(-2),
+    left: moderateScale(-2),
     borderTopWidth: 4,
     borderLeftWidth: 4,
-    borderTopLeftRadius: 12,
+    borderTopLeftRadius: moderateScale(12),
   },
   topRight: {
-    top: -2,
-    right: -2,
+    top: moderateScale(-2),
+    right: moderateScale(-2),
     borderTopWidth: 4,
     borderRightWidth: 4,
-    borderTopRightRadius: 12,
+    borderTopRightRadius: moderateScale(12),
   },
   bottomLeft: {
-    bottom: -2,
-    left: -2,
+    bottom: moderateScale(-2),
+    left: moderateScale(-2),
     borderBottomWidth: 4,
     borderLeftWidth: 4,
-    borderBottomLeftRadius: 12,
+    borderBottomLeftRadius: moderateScale(12),
   },
   bottomRight: {
-    bottom: -2,
-    right: -2,
+    bottom: moderateScale(-2),
+    right: moderateScale(-2),
     borderBottomWidth: 4,
     borderRightWidth: 4,
-    borderBottomRightRadius: 12,
+    borderBottomRightRadius: moderateScale(12),
   },
   instructionBadge: {
-    marginTop: 40,
+    marginTop: verticalScale(40),
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    gap: moderateScale(10),
+    paddingHorizontal: moderateScale(20),
+    paddingVertical: verticalScale(10),
     backgroundColor: 'rgba(0,0,0,0.6)',
-    borderRadius: 24,
+    borderRadius: moderateScale(24),
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.1)',
   },
   instructionText: {
     fontFamily: 'Inter_500Medium',
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: '#fff',
-    letterSpacing: 0.2,
+    letterSpacing: moderateScale(0.2),
   },
   bottomContainer: {
     flex: 1,
     justifyContent: 'flex-end',
-    paddingHorizontal: 20,
+    paddingHorizontal: moderateScale(20),
   },
   detailsSurface: {
     backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    borderRadius: 28,
-    padding: 20,
+    borderRadius: moderateScale(28),
+    padding: moderateScale(20),
     alignItems: 'center',
   },
   statusBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: moderateScale(10),
     backgroundColor: 'rgba(0, 106, 106, 0.08)',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 16,
-    marginBottom: 12,
+    paddingHorizontal: moderateScale(16),
+    paddingVertical: verticalScale(8),
+    borderRadius: moderateScale(16),
+    marginBottom: verticalScale(12),
   },
   statusDot: {
-    width: 8,
-    height: 8,
+    width: moderateScale(8),
+    height: moderateScale(8),
     backgroundColor: Colors.primary,
-    borderRadius: 4,
+    borderRadius: moderateScale(4),
   },
   statusText: {
     fontFamily: 'Manrope_700Bold',
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: Colors.primary,
   },
   description: {
     fontFamily: 'Inter_400Regular',
-    fontSize: 13,
+    fontSize: moderateScale(13),
     color: Colors.onSurfaceVariant,
     textAlign: 'center',
-    lineHeight: 18,
-    marginBottom: 12,
+    lineHeight: moderateScale(18),
+    marginBottom: verticalScale(12),
   },
   securityRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
+    gap: moderateScale(6),
   },
   securityText: {
     fontFamily: 'Inter_700Bold',
-    fontSize: 10,
+    fontSize: moderateScale(10),
     color: Colors.primary,
-    letterSpacing: 0.8,
+    letterSpacing: moderateScale(0.8),
   },
   bottomNav: {
     position: 'absolute',
@@ -268,31 +269,31 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
-    paddingTop: 16,
-    paddingHorizontal: 20,
+    borderTopLeftRadius: moderateScale(32),
+    borderTopRightRadius: moderateScale(32),
+    paddingTop: verticalScale(16),
+    paddingHorizontal: moderateScale(20),
   },
   navAction: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 80,
-    height: 60,
+    width: moderateScale(80),
+    height: verticalScale(60),
   },
   navLabel: {
     fontFamily: 'Inter_600SemiBold',
-    fontSize: 10,
-    marginTop: 6,
+    fontSize: moderateScale(10),
+    marginTop: verticalScale(6),
     color: Colors.onSurfaceVariant,
-    letterSpacing: 0.5,
+    letterSpacing: moderateScale(0.5),
   },
   captureButton: {
-    transform: [{ translateY: -25 }],
+    transform: [{ translateY: verticalScale(-25) }],
   },
   captureOuter: {
-    width: 84,
-    height: 84,
-    borderRadius: 42,
+    width: moderateScale(84),
+    height: moderateScale(84),
+    borderRadius: moderateScale(42),
     borderWidth: 4,
     borderColor: Colors.primary,
     backgroundColor: 'white',
@@ -300,9 +301,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   captureInner: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: moderateScale(60),
+    height: moderateScale(60),
+    borderRadius: moderateScale(30),
     backgroundColor: Colors.primary,
   },
 });

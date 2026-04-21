@@ -3,6 +3,7 @@ import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle, TouchableOpac
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Colors } from '../constants/colors';
+import { moderateScale, verticalScale } from '../utils/scaling';
 
 interface GradientButtonProps extends TouchableOpacityProps {
   title: string;
@@ -20,7 +21,7 @@ export function GradientButton({ title, icon, style, textStyle, ...props }: Grad
         end={{ x: 1, y: 1 }}
         style={styles.gradient}
       >
-        {icon && <MaterialIcons name={icon} size={20} color={Colors.onPrimary} style={styles.icon} />}
+        {icon && <MaterialIcons name={icon} size={moderateScale(20)} color={Colors.onPrimary} style={styles.icon} />}
         <Text style={[styles.text, textStyle]}>{title}</Text>
       </LinearGradient>
     </TouchableOpacity>
@@ -30,28 +31,28 @@ export function GradientButton({ title, icon, style, textStyle, ...props }: Grad
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    borderRadius: 16,
+    borderRadius: moderateScale(16),
     shadowColor: Colors.primary,
-    shadowOffset: { width: 0, height: 8 },
+    shadowOffset: { width: 0, height: moderateScale(8) },
     shadowOpacity: 0.2,
-    shadowRadius: 20,
+    shadowRadius: moderateScale(20),
     elevation: 8,
   },
   gradient: {
     width: '100%',
-    paddingVertical: 20,
-    paddingHorizontal: 24,
-    borderRadius: 16,
+    paddingVertical: verticalScale(20),
+    paddingHorizontal: moderateScale(24),
+    borderRadius: moderateScale(16),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   text: {
     fontFamily: 'Manrope_700Bold',
-    fontSize: 18,
+    fontSize: moderateScale(18),
     color: Colors.onPrimary,
   },
   icon: {
-    marginRight: 8,
+    marginRight: moderateScale(8),
   },
 });

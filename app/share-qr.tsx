@@ -6,6 +6,7 @@ import { TopAppBar } from '../src/components/TopAppBar';
 import { Colors } from '../src/constants/colors';
 import { GradientButton } from '../src/components/GradientButton';
 import { ShareModal } from '../src/components/ShareModal';
+import { moderateScale, verticalScale } from '../src/utils/scaling';
 
 export default function ShareQrScreen() {
   const [scope, setScope] = useState<'full' | 'hospital'>('full');
@@ -44,14 +45,14 @@ export default function ShareQrScreen() {
           <View style={styles.qrContainer}>
             {/* Timer Badge */}
             <View style={styles.timerBadge}>
-              <MaterialIcons name="schedule" size={16} color={Colors.surface} />
+              <MaterialIcons name="schedule" size={moderateScale(16)} color={Colors.surface} />
               <Text style={styles.timerText}>Expires in 5:00</Text>
             </View>
 
             {/* QR Placeholder */}
             <View style={styles.qrBox}>
               <View style={styles.qrBorder}>
-                <MaterialIcons name="qr-code-2" size={120} color="rgba(0, 103, 103, 0.2)" />
+                <MaterialIcons name="qr-code-2" size={moderateScale(120)} color="rgba(0, 103, 103, 0.2)" />
                 {/* Fake QR pattern */}
                 <View style={styles.fakeQr}>
                   <View style={styles.fakeQrRow}>
@@ -94,14 +95,14 @@ export default function ShareQrScreen() {
           <View style={styles.secondaryActions}>
             <TouchableOpacity style={styles.secondaryActionBtn}>
               <View style={styles.secondaryActionIcon}>
-                <MaterialIcons name="print" size={24} color={Colors.onSurfaceVariant} />
+                <MaterialIcons name="print" size={moderateScale(24)} color={Colors.onSurfaceVariant} />
               </View>
               <Text style={styles.secondaryActionText}>Print PDF</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.secondaryActionBtn}>
               <View style={styles.secondaryActionIcon}>
-                <MaterialIcons name="lock-reset" size={24} color={Colors.onSurfaceVariant} />
+                <MaterialIcons name="lock-reset" size={moderateScale(24)} color={Colors.onSurfaceVariant} />
               </View>
               <Text style={styles.secondaryActionText}>Regenerate</Text>
             </TouchableOpacity>
@@ -110,7 +111,7 @@ export default function ShareQrScreen() {
 
         {/* Privacy Note */}
         <View style={styles.privacyNote}>
-          <MaterialIcons name="shield" size={24} color={Colors.tertiary} />
+          <MaterialIcons name="shield" size={moderateScale(24)} color={Colors.tertiary} />
           <View style={styles.privacyContent}>
             <Text style={styles.privacyTitle}>Security Guard Enabled</Text>
             <Text style={styles.privacyDesc}>
@@ -137,51 +138,51 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.surface,
   },
   scrollContent: {
-    paddingTop: 88,
-    paddingHorizontal: 24,
+    paddingTop: verticalScale(88),
+    paddingHorizontal: moderateScale(24),
   },
   header: {
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: verticalScale(40),
   },
   title: {
     fontFamily: 'Manrope_800ExtraBold',
-    fontSize: 28,
+    fontSize: moderateScale(28),
     color: Colors.onSurface,
-    marginBottom: 8,
+    marginBottom: verticalScale(8),
   },
   subtitle: {
     fontFamily: 'Inter_400Regular',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: Colors.onSurfaceVariant,
     textAlign: 'center',
-    paddingHorizontal: 16,
-    lineHeight: 24,
+    paddingHorizontal: moderateScale(16),
+    lineHeight: moderateScale(24),
   },
   scopeContainer: {
     flexDirection: 'row',
     backgroundColor: Colors.surfaceContainerLow,
-    padding: 6,
-    borderRadius: 16,
-    marginBottom: 32,
+    padding: moderateScale(6),
+    borderRadius: moderateScale(16),
+    marginBottom: verticalScale(32),
   },
   scopeButton: {
     flex: 1,
-    paddingVertical: 12,
+    paddingVertical: verticalScale(12),
     alignItems: 'center',
-    borderRadius: 12,
+    borderRadius: moderateScale(12),
   },
   scopeButtonActive: {
     backgroundColor: Colors.surfaceContainerLowest,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: moderateScale(2) },
     shadowOpacity: 0.05,
-    shadowRadius: 4,
+    shadowRadius: moderateScale(4),
     elevation: 2,
   },
   scopeText: {
     fontFamily: 'Inter_500Medium',
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: Colors.onSurfaceVariant,
   },
   scopeTextActive: {
@@ -190,88 +191,88 @@ const styles = StyleSheet.create({
   },
   qrWrapper: {
     position: 'relative',
-    marginBottom: 16,
+    marginBottom: verticalScale(16),
   },
   qrGlow: {
     position: 'absolute',
-    top: -16,
-    left: -16,
-    right: -16,
-    bottom: -16,
+    top: moderateScale(-16),
+    left: moderateScale(-16),
+    right: moderateScale(-16),
+    bottom: moderateScale(-16),
     backgroundColor: 'rgba(0, 103, 103, 0.05)',
-    borderRadius: 32,
+    borderRadius: moderateScale(32),
   },
   qrContainer: {
     backgroundColor: Colors.surfaceContainerLowest,
-    borderRadius: 24,
-    padding: 32,
+    borderRadius: moderateScale(24),
+    padding: moderateScale(32),
     alignItems: 'center',
     shadowColor: '#191c1d',
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: { width: 0, height: moderateScale(4) },
     shadowOpacity: 0.04,
-    shadowRadius: 24,
+    shadowRadius: moderateScale(24),
     elevation: 2,
   },
   timerBadge: {
     position: 'absolute',
-    top: -16,
+    top: moderateScale(-16),
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: Colors.onSurface,
-    paddingHorizontal: 16,
-    paddingVertical: 6,
-    borderRadius: 16,
-    gap: 8,
+    paddingHorizontal: moderateScale(16),
+    paddingVertical: verticalScale(6),
+    borderRadius: moderateScale(16),
+    gap: moderateScale(8),
     zIndex: 10,
   },
   timerText: {
     fontFamily: 'Inter_500Medium',
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: Colors.surface,
   },
   qrBox: {
     width: '100%',
     aspectRatio: 1,
     backgroundColor: Colors.surfaceContainerLow,
-    borderRadius: 16,
-    padding: 16,
+    borderRadius: moderateScale(16),
+    padding: moderateScale(16),
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 32,
+    marginBottom: verticalScale(32),
   },
   qrBorder: {
     width: '100%',
     height: '100%',
     borderWidth: 4,
     borderColor: 'rgba(0, 103, 103, 0.2)',
-    borderRadius: 16,
+    borderRadius: moderateScale(16),
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
   },
   fakeQr: {
     ...StyleSheet.absoluteFillObject,
-    padding: 24,
+    padding: moderateScale(24),
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
+    gap: moderateScale(8),
     opacity: 0.8,
   },
   fakeQrRow: {
     flexDirection: 'row',
-    gap: 8,
+    gap: moderateScale(8),
   },
   qrBlockDark: {
-    width: 24,
-    height: 24,
+    width: moderateScale(24),
+    height: moderateScale(24),
     backgroundColor: Colors.onSurface,
-    borderRadius: 4,
+    borderRadius: moderateScale(4),
   },
   qrBlockLight: {
-    width: 24,
-    height: 24,
+    width: moderateScale(24),
+    height: moderateScale(24),
     backgroundColor: Colors.surface,
-    borderRadius: 4,
+    borderRadius: moderateScale(4),
   },
   qrMetaContainer: {
     alignItems: 'center',
@@ -279,61 +280,61 @@ const styles = StyleSheet.create({
   tokenLabel: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
-    marginBottom: 8,
+    gap: moderateScale(8),
+    marginBottom: verticalScale(8),
   },
   pulseDot: {
-    width: 8,
-    height: 8,
+    width: moderateScale(8),
+    height: moderateScale(8),
     backgroundColor: Colors.primary,
-    borderRadius: 4,
+    borderRadius: moderateScale(4),
   },
   tokenText: {
     fontFamily: 'Inter_700Bold',
-    fontSize: 12,
+    fontSize: moderateScale(12),
     color: Colors.primary,
-    letterSpacing: 1,
+    letterSpacing: moderateScale(1),
   },
   tokenId: {
     fontFamily: 'Inter_400Regular',
-    fontSize: 12,
+    fontSize: moderateScale(12),
     color: Colors.onSurfaceVariant,
     opacity: 0.6,
-    letterSpacing: -0.5,
+    letterSpacing: moderateScale(-0.5),
   },
   actionsContainer: {
-    gap: 16,
-    marginBottom: 24,
+    gap: verticalScale(16),
+    marginBottom: verticalScale(24),
   },
   secondaryActions: {
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: 24,
-    paddingVertical: 16,
+    gap: moderateScale(24),
+    paddingVertical: verticalScale(16),
   },
   secondaryActionBtn: {
     alignItems: 'center',
-    gap: 8,
+    gap: moderateScale(8),
   },
   secondaryActionIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: moderateScale(48),
+    height: moderateScale(48),
+    borderRadius: moderateScale(24),
     backgroundColor: Colors.surfaceContainerLow,
     alignItems: 'center',
     justifyContent: 'center',
   },
   secondaryActionText: {
     fontFamily: 'Inter_500Medium',
-    fontSize: 12,
+    fontSize: moderateScale(12),
     color: Colors.onSurfaceVariant,
   },
   privacyNote: {
     flexDirection: 'row',
     backgroundColor: 'rgba(171, 98, 60, 0.1)', // tertiary-container at 10%
-    padding: 24,
-    borderRadius: 16,
-    gap: 16,
+    padding: moderateScale(24),
+    borderRadius: moderateScale(16),
+    gap: moderateScale(16),
     borderWidth: 1,
     borderColor: 'rgba(171, 98, 60, 0.05)',
   },
@@ -342,14 +343,14 @@ const styles = StyleSheet.create({
   },
   privacyTitle: {
     fontFamily: 'Inter_700Bold',
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: Colors.tertiary,
-    marginBottom: 4,
+    marginBottom: verticalScale(4),
   },
   privacyDesc: {
     fontFamily: 'Inter_400Regular',
-    fontSize: 12,
+    fontSize: moderateScale(12),
     color: Colors.onSurfaceVariant,
-    lineHeight: 18,
+    lineHeight: moderateScale(18),
   },
 });

@@ -5,6 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { TopAppBar } from '../../src/components/TopAppBar';
 import { Colors } from '../../src/constants/colors';
+import { moderateScale, verticalScale } from '../../src/utils/scaling';
 
 export default function DashboardScreen() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function DashboardScreen() {
           <Text style={styles.name}>Prithwi</Text>
 
           <View style={styles.searchContainer}>
-            <MaterialIcons name="search" size={24} color="rgba(62, 73, 73, 0.6)" style={styles.searchIcon} />
+            <MaterialIcons name="search" size={moderateScale(24)} color="rgba(62, 73, 73, 0.6)" style={styles.searchIcon} />
             <TextInput 
               style={styles.searchInput}
               placeholder="Search records, labs, or providers..."
@@ -35,7 +36,7 @@ export default function DashboardScreen() {
               onPress={() => router.push('/(tabs)/upload')}
             >
               <View style={styles.actionIconContainer}>
-                <MaterialIcons name="add-circle" size={24} color={Colors.primary} />
+                <MaterialIcons name="add-circle" size={moderateScale(24)} color={Colors.primary} />
               </View>
               <Text style={styles.actionLabel}>Upload</Text>
             </TouchableOpacity>
@@ -46,7 +47,7 @@ export default function DashboardScreen() {
               onPress={() => router.push('/share-qr')}
             >
               <View style={styles.actionIconContainer}>
-                <MaterialIcons name="qr-code-2" size={24} color={Colors.primary} />
+                <MaterialIcons name="qr-code-2" size={moderateScale(24)} color={Colors.primary} />
               </View>
               <Text style={styles.actionLabel}>Generate QR</Text>
             </TouchableOpacity>
@@ -64,7 +65,7 @@ export default function DashboardScreen() {
           <View style={[styles.bentoCard, styles.cardLight]}>
             <View style={styles.cardHeader}>
               <View style={[styles.iconBadge, { backgroundColor: '#fee2e2' }]}>
-                <MaterialIcons name="favorite" size={20} color="#dc2626" />
+                <MaterialIcons name="favorite" size={moderateScale(20)} color="#dc2626" />
               </View>
               <Text style={styles.badgeText}>NORMAL RANGE</Text>
             </View>
@@ -79,7 +80,7 @@ export default function DashboardScreen() {
           <View style={[styles.bentoCard, styles.cardPrimary]}>
             <View>
               <View style={[styles.iconBadge, { backgroundColor: 'rgba(255,255,255,0.2)' }]}>
-                <MaterialIcons name="dark-mode" size={20} color={Colors.onPrimaryContainer} />
+                <MaterialIcons name="dark-mode" size={moderateScale(20)} color={Colors.onPrimaryContainer} />
               </View>
               <Text style={[styles.cardTitle, { color: Colors.onPrimaryContainer, marginTop: 16 }]}>Sleep Score</Text>
               <Text style={[styles.mainValue, { color: Colors.onPrimaryContainer, fontSize: 48 }]}>88</Text>
@@ -104,7 +105,7 @@ export default function DashboardScreen() {
           <View style={[styles.bentoCard, styles.cardLight]}>
             <View style={styles.cardHeader}>
               <View style={[styles.iconBadge, { backgroundColor: '#eff6ff' }]}>
-                <MaterialIcons name="water-drop" size={20} color="#2563eb" />
+                <MaterialIcons name="water-drop" size={moderateScale(20)} color="#2563eb" />
               </View>
               <Text style={styles.badgeText}>ACTIVE TARGET</Text>
             </View>
@@ -122,8 +123,8 @@ export default function DashboardScreen() {
             onPress={() => router.push('/scanner')}
           >
             <View style={styles.medRow}>
-              <View style={[styles.iconBadge, { backgroundColor: 'rgba(255,255,255,0.2)', width: 56, height: 56, borderRadius: 28 }]}>
-                <MaterialIcons name="camera-alt" size={28} color={Colors.onTertiary} />
+              <View style={[styles.iconBadge, { backgroundColor: 'rgba(255,255,255,0.2)', width: moderateScale(56), height: moderateScale(56), borderRadius: moderateScale(28) }]}>
+                <MaterialIcons name="camera-alt" size={moderateScale(28)} color={Colors.onTertiary} />
               </View>
               <View style={{ flex: 1, marginLeft: 16 }}>
                 <Text style={[styles.badgeText, { color: 'rgba(255,255,255,0.7)', marginBottom: 4 }]}>QUICK ACTION</Text>
@@ -145,7 +146,7 @@ export default function DashboardScreen() {
         <View style={styles.recordsList}>
           <TouchableOpacity style={styles.recordItem} onPress={() => router.push('/ai-summary')}>
             <View style={styles.recordIconContainer}>
-              <MaterialIcons name="description" size={24} color={Colors.primary} />
+              <MaterialIcons name="description" size={moderateScale(24)} color={Colors.primary} />
             </View>
             <View style={styles.recordContent}>
               <Text style={styles.recordTitle}>Annual Health Screening</Text>
@@ -155,12 +156,12 @@ export default function DashboardScreen() {
               <Text style={styles.recordDate}>Oct 14, 2023</Text>
               <Text style={styles.recordHospital}>METROPOLITAN HOSPITAL</Text>
             </View>
-            <MaterialIcons name="chevron-right" size={24} color={Colors.outlineVariant} />
+            <MaterialIcons name="chevron-right" size={moderateScale(24)} color={Colors.outlineVariant} />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.recordItem}>
             <View style={styles.recordIconContainer}>
-              <MaterialIcons name="scanner" size={24} color={Colors.primary} />
+              <MaterialIcons name="scanner" size={moderateScale(24)} color={Colors.primary} />
             </View>
             <View style={styles.recordContent}>
               <Text style={styles.recordTitle}>Lumbar Spine MRI</Text>
@@ -170,7 +171,7 @@ export default function DashboardScreen() {
               <Text style={styles.recordDate}>Sep 28, 2023</Text>
               <Text style={styles.recordHospital}>ADVANCED RADIOLOGY</Text>
             </View>
-            <MaterialIcons name="chevron-right" size={24} color={Colors.outlineVariant} />
+            <MaterialIcons name="chevron-right" size={moderateScale(24)} color={Colors.outlineVariant} />
           </TouchableOpacity>
         </View>
 
@@ -185,110 +186,110 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.surface,
   },
   scrollContent: {
-    paddingTop: 88,
-    paddingBottom: 100,
-    paddingHorizontal: 24,
+    paddingTop: verticalScale(88),
+    paddingBottom: verticalScale(100),
+    paddingHorizontal: moderateScale(24),
   },
   heroSection: {
-    marginBottom: 48,
+    marginBottom: verticalScale(48),
   },
   greeting: {
     fontFamily: 'Manrope_800ExtraBold',
-    fontSize: 32,
+    fontSize: moderateScale(32),
     color: Colors.onSurface,
-    letterSpacing: -0.5,
+    letterSpacing: moderateScale(-0.5),
   },
   name: {
     fontFamily: 'Manrope_800ExtraBold',
-    fontSize: 40,
+    fontSize: moderateScale(40),
     color: Colors.primary,
-    letterSpacing: -1,
-    marginBottom: 24,
+    letterSpacing: moderateScale(-1),
+    marginBottom: verticalScale(24),
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: Colors.surfaceContainerLow,
-    borderRadius: 32,
-    height: 56,
-    paddingHorizontal: 16,
-    marginBottom: 32,
+    borderRadius: moderateScale(32),
+    height: verticalScale(56),
+    paddingHorizontal: moderateScale(16),
+    marginBottom: verticalScale(32),
   },
   searchIcon: {
-    marginRight: 12,
+    marginRight: moderateScale(12),
   },
   searchInput: {
     flex: 1,
     fontFamily: 'Inter_400Regular',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: Colors.onSurface,
     height: '100%',
   },
   actionGrid: {
     flexDirection: 'row',
-    gap: 16,
+    gap: moderateScale(16),
   },
   actionCard: {
     flex: 1,
     backgroundColor: Colors.surfaceContainerLowest,
-    borderRadius: 24,
-    padding: 24,
+    borderRadius: moderateScale(24),
+    padding: moderateScale(24),
     alignItems: 'center',
-    gap: 12,
+    gap: moderateScale(12),
     borderWidth: 1,
     borderColor: 'rgba(189, 201, 200, 0.15)',
     shadowColor: Colors.primary,
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: { width: 0, height: moderateScale(4) },
     shadowOpacity: 0.05,
-    shadowRadius: 12,
+    shadowRadius: moderateScale(12),
     elevation: 2,
   },
   actionIconContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: moderateScale(48),
+    height: moderateScale(48),
+    borderRadius: moderateScale(24),
     backgroundColor: 'rgba(0, 103, 103, 0.1)',
     alignItems: 'center',
     justifyContent: 'center',
   },
   actionLabel: {
     fontFamily: 'Inter_700Bold',
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: Colors.onSurface,
   },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'baseline',
-    marginBottom: 24,
+    marginBottom: verticalScale(24),
   },
   sectionTitle: {
     fontFamily: 'Manrope_700Bold',
-    fontSize: 24,
+    fontSize: moderateScale(24),
     color: Colors.onSurface,
-    letterSpacing: -0.5,
+    letterSpacing: moderateScale(-0.5),
   },
   sectionAction: {
     fontFamily: 'Inter_700Bold',
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: Colors.primary,
   },
   bentoGrid: {
-    gap: 24,
-    marginBottom: 48,
+    gap: verticalScale(24),
+    marginBottom: verticalScale(48),
   },
   bentoCard: {
-    borderRadius: 24,
-    padding: 24,
+    borderRadius: moderateScale(24),
+    padding: moderateScale(24),
   },
   cardLight: {
     backgroundColor: Colors.surfaceContainerLowest,
     borderWidth: 1,
     borderColor: 'rgba(189, 201, 200, 0.1)',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: moderateScale(2) },
     shadowOpacity: 0.05,
-    shadowRadius: 8,
+    shadowRadius: moderateScale(8),
     elevation: 1,
   },
   cardPrimary: {
@@ -301,88 +302,88 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: 24,
+    marginBottom: verticalScale(24),
   },
   iconBadge: {
-    padding: 12,
-    borderRadius: 16,
+    padding: moderateScale(12),
+    borderRadius: moderateScale(16),
     alignItems: 'center',
     justifyContent: 'center',
   },
   badgeText: {
     fontFamily: 'Inter_700Bold',
-    fontSize: 10,
-    letterSpacing: 1,
+    fontSize: moderateScale(10),
+    letterSpacing: moderateScale(1),
     color: 'rgba(62, 73, 73, 0.6)',
   },
   valueContainer: {
     flexDirection: 'row',
     alignItems: 'baseline',
-    gap: 8,
-    marginBottom: 8,
+    gap: moderateScale(8),
+    marginBottom: verticalScale(8),
   },
   mainValue: {
     fontFamily: 'Manrope_800ExtraBold',
-    fontSize: 36,
+    fontSize: moderateScale(36),
     color: Colors.onSurface,
   },
   unit: {
     fontFamily: 'Inter_500Medium',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: Colors.onSurfaceVariant,
   },
   cardTitle: {
     fontFamily: 'Manrope_700Bold',
-    fontSize: 24,
+    fontSize: moderateScale(24),
   },
   cardDesc: {
     fontFamily: 'Inter_500Medium',
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: Colors.onSurfaceVariant,
-    lineHeight: 20,
+    lineHeight: moderateScale(20),
   },
   chartContainer: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    gap: 4,
-    height: 80,
-    marginTop: 16,
+    gap: moderateScale(4),
+    height: verticalScale(80),
+    marginTop: verticalScale(16),
     backgroundColor: 'rgba(243,255,254,0.1)',
-    borderRadius: 12,
-    padding: 12,
+    borderRadius: moderateScale(12),
+    padding: moderateScale(12),
   },
   bar: {
     flex: 1,
     backgroundColor: 'rgba(243,255,254,0.4)',
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
+    borderTopLeftRadius: moderateScale(4),
+    borderTopRightRadius: moderateScale(4),
   },
   medRow: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   recordsList: {
-    gap: 16,
+    gap: verticalScale(16),
   },
   recordItem: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: Colors.surfaceContainerLow,
-    padding: 16,
-    borderRadius: 20,
-    gap: 16,
+    padding: moderateScale(16),
+    borderRadius: moderateScale(20),
+    gap: moderateScale(16),
   },
   recordIconContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 16,
+    width: moderateScale(48),
+    height: moderateScale(48),
+    borderRadius: moderateScale(16),
     backgroundColor: Colors.surfaceContainerLowest,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: moderateScale(2) },
     shadowOpacity: 0.05,
-    shadowRadius: 4,
+    shadowRadius: moderateScale(4),
     elevation: 1,
   },
   recordContent: {
@@ -390,13 +391,13 @@ const styles = StyleSheet.create({
   },
   recordTitle: {
     fontFamily: 'Inter_700Bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: Colors.onSurface,
-    marginBottom: 4,
+    marginBottom: verticalScale(4),
   },
   recordDesc: {
     fontFamily: 'Inter_400Regular',
-    fontSize: 12,
+    fontSize: moderateScale(12),
     color: Colors.onSurfaceVariant,
   },
   recordMeta: {
@@ -405,14 +406,14 @@ const styles = StyleSheet.create({
   },
   recordDate: {
     fontFamily: 'Inter_700Bold',
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: Colors.onSurface,
   },
   recordHospital: {
     fontFamily: 'Inter_500Medium',
-    fontSize: 10,
+    fontSize: moderateScale(10),
     color: Colors.onSurfaceVariant,
-    marginTop: 4,
-    letterSpacing: 0.5,
+    marginTop: verticalScale(4),
+    letterSpacing: moderateScale(0.5),
   },
 });

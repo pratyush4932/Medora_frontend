@@ -5,6 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Colors } from '../constants/colors';
 import { GradientButton } from './GradientButton';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { moderateScale, verticalScale } from '../utils/scaling';
 
 interface ShareModalProps {
   visible: boolean;
@@ -31,7 +32,7 @@ export function ShareModal({ visible, onClose }: ShareModalProps) {
               <View style={styles.header}>
                 <Text style={styles.title}>Share Options</Text>
                 <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-                  <MaterialIcons name="close" size={24} color={Colors.onSurfaceVariant} />
+                  <MaterialIcons name="close" size={moderateScale(24)} color={Colors.onSurfaceVariant} />
                 </TouchableOpacity>
               </View>
 
@@ -41,28 +42,28 @@ export function ShareModal({ visible, onClose }: ShareModalProps) {
                 <View style={styles.actionsGrid}>
                   <TouchableOpacity style={styles.actionItem}>
                     <View style={styles.actionIconContainer}>
-                      <MaterialIcons name="chat" size={28} color={Colors.primary} />
+                      <MaterialIcons name="chat" size={moderateScale(28)} color={Colors.primary} />
                     </View>
                     <Text style={styles.actionLabel}>WhatsApp</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity style={styles.actionItem}>
                     <View style={styles.actionIconContainer}>
-                      <MaterialIcons name="forum" size={28} color={Colors.primary} />
+                      <MaterialIcons name="forum" size={moderateScale(28)} color={Colors.primary} />
                     </View>
                     <Text style={styles.actionLabel}>Messages</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity style={styles.actionItem}>
                     <View style={styles.actionIconContainer}>
-                      <MaterialIcons name="mail" size={28} color={Colors.primary} />
+                      <MaterialIcons name="mail" size={moderateScale(28)} color={Colors.primary} />
                     </View>
                     <Text style={styles.actionLabel}>Email</Text>
                   </TouchableOpacity>
                 </View>
 
                 <View style={styles.footer}>
-                  <MaterialIcons name="lock" size={16} color={Colors.onSurfaceVariant} />
+                  <MaterialIcons name="lock" size={moderateScale(16)} color={Colors.onSurfaceVariant} />
                   <Text style={styles.footerText}>Your data is shared securely.</Text>
                 </View>
               </View>
@@ -82,86 +83,86 @@ const styles = StyleSheet.create({
   },
   sheet: {
     backgroundColor: Colors.surfaceContainerLowest,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    borderTopLeftRadius: moderateScale(24),
+    borderTopRightRadius: moderateScale(24),
     shadowColor: '#191c1d',
-    shadowOffset: { width: 0, height: -20 },
+    shadowOffset: { width: 0, height: moderateScale(-20) },
     shadowOpacity: 0.15,
-    shadowRadius: 60,
+    shadowRadius: moderateScale(60),
     elevation: 24,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 24,
-    paddingVertical: 16,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    paddingHorizontal: moderateScale(24),
+    paddingVertical: verticalScale(16),
+    borderTopLeftRadius: moderateScale(24),
+    borderTopRightRadius: moderateScale(24),
     backgroundColor: 'rgba(248, 250, 250, 0.8)',
   },
   title: {
     fontFamily: 'Manrope_700Bold',
-    fontSize: 18,
+    fontSize: moderateScale(18),
     color: Colors.primaryContainer,
   },
   closeButton: {
-    padding: 8,
-    borderRadius: 20,
+    padding: moderateScale(8),
+    borderRadius: moderateScale(20),
     backgroundColor: Colors.surfaceContainerLow,
   },
   content: {
-    paddingHorizontal: 24,
-    paddingTop: 16,
-    paddingBottom: 8,
-    gap: 32,
+    paddingHorizontal: moderateScale(24),
+    paddingTop: verticalScale(16),
+    paddingBottom: verticalScale(8),
+    gap: moderateScale(32),
   },
   copyButton: {
-    borderRadius: 20,
+    borderRadius: moderateScale(20),
   },
   actionsGrid: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    gap: 16,
+    gap: moderateScale(16),
   },
   actionItem: {
     flex: 1,
     alignItems: 'center',
-    gap: 12,
+    gap: moderateScale(12),
     backgroundColor: Colors.surfaceContainerLow,
-    padding: 16,
-    borderRadius: 16,
+    padding: moderateScale(16),
+    borderRadius: moderateScale(16),
   },
   actionIconContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: moderateScale(48),
+    height: moderateScale(48),
+    borderRadius: moderateScale(24),
     backgroundColor: Colors.surfaceContainerLowest,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: moderateScale(2) },
     shadowOpacity: 0.05,
-    shadowRadius: 4,
+    shadowRadius: moderateScale(4),
     elevation: 2,
   },
   actionLabel: {
     fontFamily: 'Inter_500Medium',
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: Colors.onSurfaceVariant,
   },
   footer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
-    marginTop: 16,
+    gap: moderateScale(8),
+    marginTop: moderateScale(16),
     opacity: 0.7,
   },
   footerText: {
     fontFamily: 'Inter_500Medium',
-    fontSize: 12,
+    fontSize: moderateScale(12),
     color: Colors.onSurfaceVariant,
-    letterSpacing: 0.5,
+    letterSpacing: moderateScale(0.5),
   },
 });

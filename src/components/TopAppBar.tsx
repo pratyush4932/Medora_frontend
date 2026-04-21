@@ -5,6 +5,7 @@ import { BlurView } from 'expo-blur';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors } from '../constants/colors';
 import { useRouter } from 'expo-router';
+import { moderateScale, verticalScale } from '../utils/scaling';
 
 interface TopAppBarProps {
   title: string;
@@ -36,7 +37,7 @@ export function TopAppBar({
               onPress={() => router.back()}
               activeOpacity={0.7}
             >
-              <MaterialIcons name="arrow-back" size={24} color={Colors.primary} />
+              <MaterialIcons name="arrow-back" size={moderateScale(24)} color={Colors.primary} />
             </TouchableOpacity>
           )}
           {!showBack && showAvatar && (
@@ -53,12 +54,12 @@ export function TopAppBar({
         <View style={styles.rightSection}>
           {rightAction === 'notifications' && (
             <TouchableOpacity style={styles.iconButton} onPress={onRightPress}>
-              <MaterialIcons name="notifications-none" size={24} color={Colors.onSurfaceVariant} />
+              <MaterialIcons name="notifications-none" size={moderateScale(24)} color={Colors.onSurfaceVariant} />
             </TouchableOpacity>
           )}
           {rightAction === 'close' && (
-            <TouchableOpacity style={[styles.iconButton, { backgroundColor: 'rgba(0,0,0,0.4)', borderRadius: 8, padding: 4 }]} onPress={onRightPress}>
-              <MaterialIcons name="close" size={20} color="#fff" />
+            <TouchableOpacity style={[styles.iconButton, { backgroundColor: 'rgba(0,0,0,0.4)', borderRadius: moderateScale(8), padding: moderateScale(4) }]} onPress={onRightPress}>
+              <MaterialIcons name="close" size={moderateScale(20)} color="#fff" />
             </TouchableOpacity>
           )}
           {rightAction === 'notifications' && showAvatar && showBack && (
@@ -88,42 +89,42 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 24,
-    paddingVertical: 16,
-    height: 64,
+    paddingHorizontal: moderateScale(24),
+    paddingVertical: verticalScale(16),
+    height: verticalScale(64),
   },
   leftSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    gap: moderateScale(12),
   },
   rightSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 16,
+    gap: moderateScale(16),
   },
   title: {
     fontFamily: 'Manrope_800ExtraBold',
-    fontSize: 20,
+    fontSize: moderateScale(20),
     color: Colors.primary,
-    letterSpacing: -0.5,
+    letterSpacing: moderateScale(-0.5),
   },
   iconButton: {
-    padding: 8,
-    borderRadius: 20,
+    padding: moderateScale(8),
+    borderRadius: moderateScale(20),
     backgroundColor: 'transparent',
   },
   avatarContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: moderateScale(40),
+    height: moderateScale(40),
+    borderRadius: moderateScale(20),
     overflow: 'hidden',
     backgroundColor: Colors.surfaceContainer,
   },
   avatarContainerSmall: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    width: moderateScale(32),
+    height: moderateScale(32),
+    borderRadius: moderateScale(16),
     overflow: 'hidden',
     backgroundColor: Colors.surfaceContainer,
   },

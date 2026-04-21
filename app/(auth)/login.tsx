@@ -5,6 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { Colors } from '../../src/constants/colors';
 import { GradientButton } from '../../src/components/GradientButton';
+import { moderateScale, verticalScale } from '../../src/utils/scaling';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function LoginScreen() {
         {/* Header */}
         <View style={styles.header}>
           <View style={styles.logoContainer}>
-            <MaterialIcons name="medical-services" size={24} color={Colors.onPrimaryContainer} />
+            <MaterialIcons name="medical-services" size={moderateScale(24)} color={Colors.onPrimaryContainer} />
           </View>
           <Text style={styles.brandName}>Medora</Text>
         </View>
@@ -70,7 +71,7 @@ export default function LoginScreen() {
           {/* Footer */}
           <View style={styles.footer}>
             <View style={styles.securityBadge}>
-              <MaterialIcons name="enhanced-encryption" size={16} color={Colors.primary} />
+              <MaterialIcons name="enhanced-encryption" size={moderateScale(16)} color={Colors.primary} />
               <Text style={styles.securityText}>Your records are encrypted</Text>
             </View>
             <Text style={styles.disclaimer}>
@@ -93,46 +94,46 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    paddingHorizontal: 24,
+    paddingHorizontal: moderateScale(24),
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
-    paddingVertical: 16,
-    marginBottom: 24,
+    gap: moderateScale(8),
+    paddingVertical: verticalScale(16),
+    marginBottom: verticalScale(24),
   },
   logoContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: moderateScale(40),
+    height: moderateScale(40),
+    borderRadius: moderateScale(20),
     backgroundColor: Colors.primaryContainer,
     alignItems: 'center',
     justifyContent: 'center',
   },
   brandName: {
     fontFamily: 'Manrope_800ExtraBold',
-    fontSize: 24,
+    fontSize: moderateScale(24),
     color: Colors.onSurface,
-    letterSpacing: -0.5,
+    letterSpacing: moderateScale(-0.5),
   },
   heroWrapper: {
     position: 'relative',
-    marginBottom: 40,
+    marginBottom: verticalScale(40),
   },
   heroGlow: {
     position: 'absolute',
-    top: -16,
-    left: -16,
-    right: -16,
-    bottom: -16,
+    top: moderateScale(-16),
+    left: moderateScale(-16),
+    right: moderateScale(-16),
+    bottom: moderateScale(-16),
     backgroundColor: 'rgba(120, 214, 213, 0.2)', // primary-fixed-dim
-    borderRadius: 24,
+    borderRadius: moderateScale(24),
   },
   heroContainer: {
     width: '100%',
     aspectRatio: 16 / 9,
-    borderRadius: 16,
+    borderRadius: moderateScale(16),
     overflow: 'hidden',
     backgroundColor: Colors.surfaceContainerLow,
   },
@@ -149,87 +150,87 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'Manrope_800ExtraBold',
-    fontSize: 36,
+    fontSize: moderateScale(36),
     color: Colors.onSurface,
-    lineHeight: 44,
-    marginBottom: 16,
-    letterSpacing: -1,
+    lineHeight: moderateScale(44),
+    marginBottom: verticalScale(16),
+    letterSpacing: moderateScale(-1),
   },
   subtitle: {
     fontFamily: 'Inter_400Regular',
-    fontSize: 18,
+    fontSize: moderateScale(18),
     color: Colors.onSurfaceVariant,
-    lineHeight: 28,
-    maxWidth: 280,
-    marginBottom: 32,
+    lineHeight: moderateScale(28),
+    maxWidth: moderateScale(280),
+    marginBottom: verticalScale(32),
   },
   formContainer: {
-    gap: 24,
-    marginBottom: 32,
+    gap: verticalScale(24),
+    marginBottom: verticalScale(32),
   },
   inputGroup: {
-    gap: 8,
+    gap: verticalScale(8),
   },
   inputLabel: {
     fontFamily: 'Inter_500Medium',
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: Colors.onSurfaceVariant,
-    marginLeft: 4,
+    marginLeft: moderateScale(4),
   },
   inputWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: Colors.surfaceContainerHighest,
-    borderRadius: 16,
-    height: 64,
-    paddingHorizontal: 20,
+    borderRadius: moderateScale(16),
+    height: verticalScale(64),
+    paddingHorizontal: moderateScale(20),
     shadowColor: '#191c1d',
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: { width: 0, height: moderateScale(4) },
     shadowOpacity: 0.05,
-    shadowRadius: 10,
+    shadowRadius: moderateScale(10),
     elevation: 2,
   },
   prefix: {
     fontFamily: 'Inter_500Medium',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: 'rgba(62, 73, 73, 0.6)',
-    marginRight: 12,
+    marginRight: moderateScale(12),
   },
   input: {
     flex: 1,
     fontFamily: 'Inter_400Regular',
-    fontSize: 18,
+    fontSize: moderateScale(18),
     color: Colors.onSurface,
     height: '100%',
   },
   button: {
-    marginTop: 8,
+    marginTop: verticalScale(8),
   },
   footer: {
     alignItems: 'center',
-    gap: 24,
+    gap: verticalScale(24),
   },
   securityBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
-    paddingHorizontal: 20,
-    paddingVertical: 12,
+    gap: moderateScale(12),
+    paddingHorizontal: moderateScale(20),
+    paddingVertical: verticalScale(12),
     backgroundColor: Colors.surfaceContainerLow,
-    borderRadius: 24,
+    borderRadius: moderateScale(24),
   },
   securityText: {
     fontFamily: 'Inter_500Medium',
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: Colors.onSurfaceVariant,
   },
   disclaimer: {
     fontFamily: 'Inter_400Regular',
-    fontSize: 12,
+    fontSize: moderateScale(12),
     color: 'rgba(62, 73, 73, 0.6)',
     textAlign: 'center',
-    maxWidth: 240,
-    lineHeight: 18,
+    maxWidth: moderateScale(240),
+    lineHeight: moderateScale(18),
   },
   link: {
     textDecorationLine: 'underline',
