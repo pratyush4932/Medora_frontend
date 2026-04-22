@@ -44,10 +44,10 @@ export function BottomTabBar({ state, descriptors, navigation }: BottomTabBarPro
           };
 
           let iconName: keyof typeof MaterialIcons.glyphMap = 'home';
-          if (route.name === 'upload') iconName = 'add';
+          if (route.name === 'summary') iconName = 'description';
           else if (route.name === 'hospital') iconName = 'local-hospital';
 
-          const isCenter = route.name === 'upload';
+          const isCenter = false; // Disable special center button for summary tab
 
           // Center prominent Add button (if we wanted to make the middle one an add button instead of records)
           // For now, based on my_records_folders, it's Home, Records, Hospital

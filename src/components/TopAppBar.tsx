@@ -54,7 +54,7 @@ export function TopAppBar({
         <View style={styles.rightSection}>
           {rightAction === 'notifications' && (
             <TouchableOpacity style={styles.iconButton} onPress={onRightPress}>
-              <MaterialIcons name="notifications-none" size={moderateScale(24)} color={Colors.onSurfaceVariant} />
+              <MaterialIcons name="notifications" size={moderateScale(22)} color={Colors.primary} />
             </TouchableOpacity>
           )}
           {rightAction === 'close' && (
@@ -110,9 +110,12 @@ const styles = StyleSheet.create({
     letterSpacing: moderateScale(-0.5),
   },
   iconButton: {
-    padding: moderateScale(8),
+    padding: moderateScale(6),
     borderRadius: moderateScale(20),
     backgroundColor: 'transparent',
+    overflow: 'visible',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   avatarContainer: {
     width: moderateScale(40),

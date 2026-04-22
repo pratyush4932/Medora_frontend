@@ -12,8 +12,8 @@ export default function TabLayout() {
         options={{ title: 'Home' }} 
       />
       <Tabs.Screen 
-        name="upload" 
-        options={{ title: 'Upload' }} 
+        name="summary" 
+        options={{ title: 'Summary' }} 
       />
       <Tabs.Screen 
         name="hospital" 
