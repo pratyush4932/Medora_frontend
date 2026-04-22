@@ -1,88 +1,152 @@
-import React from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, Platform, Modal, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { Colors } from '../../src/constants/colors';
-import { GradientButton } from '../../src/components/GradientButton';
 import { moderateScale, verticalScale } from '../../src/utils/scaling';
+import { COUNTRIES, Country } from '../../src/constants/countries';
+
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export default function LoginScreen() {
   const router = useRouter();
+  const [activeTab, setActiveTab] = useState<'login' | 'signup'>('login');
+  const [isCountryModalVisible, setIsCountryModalVisible] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<Country>(
+    COUNTRIES.find(c => c.code === 'US') || COUNTRIES[0]
+  );
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleLogin = () => {
+  const filteredCountries = COUNTRIES.filter(country => 
+    country.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    country.dial_code.includes(searchQuery)
+  );
+
+  const handleSendOTP = () => {
     router.replace('/(tabs)/home');
   };
 
+  const renderCountryItem = ({ item }: { item: Country }) => (
+    <TouchableOpacity 
+      style={styles.countryItem}
+      onPress={() => {
+        setSelectedCountry(item);
+        setIsCountryModalVisible(false);
+        setSearchQuery('');
+      }}
+    >
+      <Text style={styles.countryName}>{item.name}</Text>
+      <Text style={styles.countryDialCode}>{item.dial_code}</Text>
+    </TouchableOpacity>
+  );
+
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        
-        {/* Header */}
-        <View style={styles.header}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.backgroundGlow} />
+      
+      <View style={styles.card}>
+        {/* Header Icon */}
+        <View style={styles.logoWrapper}>
           <View style={styles.logoContainer}>
-            <MaterialIcons name="medical-services" size={moderateScale(24)} color={Colors.onPrimaryContainer} />
+            <MaterialIcons name="medical-services" size={moderateScale(24)} color={Colors.primary} />
           </View>
-          <Text style={styles.brandName}>Medora</Text>
         </View>
 
-        {/* Hero Image */}
-        <View style={styles.heroWrapper}>
-          <View style={styles.heroGlow} />
-          <View style={styles.heroContainer}>
-            <Image 
-              source={{ uri: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB0woUsxE5jel42g-X8bONSsP7V0Z2mpIhex3NXy7WW1GV7bd95nEdH6RbSQSABIzhXhOt_HdenGf8cvmdoj3ugvKlSXTyIKQ4Vyh4XiiXkooHcrcLjoR_1XJYSS4DNiz9wfFSdHjqdJ-aQ3AK9w6P22yApwo-a8Z2j3gaDOD1EF7kWR_flzcsSA7WDjRycWE0a5v410Ip5rGMo931B8qw40J4lbltvmI6qx-k09E9DTa6wQUj9SxxVul_0RBEYghemj9j03DDPrYc' }}
-              style={styles.heroImage}
-              resizeMode="cover"
+        {/* Title & Subtitle */}
+        <Text style={styles.title}>Welcome to{'\n'}Medora</Text>
+        <Text style={styles.subtitle}>
+          Securely access and manage your clinical narrative.
+        </Text>
+
+        {/* Tab Switcher */}
+        <View style={styles.tabContainer}>
+          <TouchableOpacity 
+            style={[styles.tab, activeTab === 'login' && styles.activeTab]}
+            onPress={() => setActiveTab('login')}
+          >
+            <Text style={[styles.tabText, activeTab === 'login' && styles.activeTabText]}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={[styles.tab, activeTab === 'signup' && styles.activeTab]}
+            onPress={() => setActiveTab('signup')}
+          >
+            <Text style={[styles.tabText, activeTab === 'signup' && styles.activeTabText]}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Form */}
+        <View style={styles.formContainer}>
+          <Text style={styles.inputLabel}>Phone Number</Text>
+          <View style={styles.phoneInputContainer}>
+            <TouchableOpacity 
+              style={styles.countryCodeContainer}
+              onPress={() => setIsCountryModalVisible(true)}
+            >
+              <MaterialIcons name="language" size={moderateScale(18)} color={Colors.onSurfaceVariant} />
+              <Text style={styles.countryCode}>{selectedCountry.dial_code}</Text>
+            </TouchableOpacity>
+            <View style={styles.divider} />
+            <TextInput 
+              style={styles.input}
+              placeholder="(555) 000-0000"
+              placeholderTextColor="rgba(62, 73, 73, 0.4)"
+              keyboardType="phone-pad"
             />
-            <View style={styles.heroOverlay} />
           </View>
+
+          <TouchableOpacity style={styles.button} activeOpacity={0.9} onPress={handleSendOTP}>
+            <Text style={styles.buttonText}>Send OTP</Text>
+            <MaterialIcons name="arrow-forward" size={moderateScale(20)} color={Colors.onPrimary} />
+          </TouchableOpacity>
         </View>
 
-        {/* Content */}
-        <View style={styles.content}>
-          <Text style={styles.title}>Secure clinical{'\n'}access.</Text>
-          <Text style={styles.subtitle}>
-            Access your curated health narrative with a one-time code.
+        {/* Footer */}
+        <View style={styles.footer}>
+          <MaterialIcons name="lock" size={moderateScale(16)} color="#8d4a26" />
+          <Text style={styles.footerText}>
+            Your records are encrypted and secure.
           </Text>
+        </View>
+      </View>
 
-          {/* Form */}
-          <View style={styles.formContainer}>
-            <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Phone Number</Text>
-              <View style={styles.inputWrapper}>
-                <Text style={styles.prefix}>+1</Text>
-                <TextInput 
-                  style={styles.input}
-                  placeholder="(555) 000-0000"
-                  placeholderTextColor={Colors.outline}
-                  keyboardType="phone-pad"
-                />
-              </View>
+      {/* Country Selection Modal */}
+      <Modal
+        visible={isCountryModalVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setIsCountryModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Select Country</Text>
+              <TouchableOpacity onPress={() => setIsCountryModalVisible(false)}>
+                <MaterialIcons name="close" size={moderateScale(24)} color={Colors.onSurface} />
+              </TouchableOpacity>
+            </View>
+            
+            <View style={styles.searchContainer}>
+              <MaterialIcons name="search" size={moderateScale(20)} color={Colors.onSurfaceVariant} />
+              <TextInput
+                style={styles.searchInput}
+                placeholder="Search country or code"
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+                autoFocus={false}
+              />
             </View>
 
-            <GradientButton 
-              title="Send OTP" 
-              onPress={handleLogin}
-              style={styles.button}
+            <FlatList
+              data={filteredCountries}
+              keyExtractor={(item) => item.code}
+              renderItem={renderCountryItem}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.countryList}
             />
           </View>
-
-          {/* Footer */}
-          <View style={styles.footer}>
-            <View style={styles.securityBadge}>
-              <MaterialIcons name="enhanced-encryption" size={moderateScale(16)} color={Colors.primary} />
-              <Text style={styles.securityText}>Your records are encrypted</Text>
-            </View>
-            <Text style={styles.disclaimer}>
-              By continuing, you agree to Medora's <Text style={styles.link}>Terms of Service</Text> and <Text style={styles.link}>Privacy Policy</Text>.
-            </Text>
-          </View>
         </View>
-
-        {/* Bottom Spacing */}
-        <View style={{ height: 40 }} />
-      </ScrollView>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -90,149 +154,211 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background,
-  },
-  scrollContent: {
-    flexGrow: 1,
-    paddingHorizontal: moderateScale(24),
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: moderateScale(8),
-    paddingVertical: verticalScale(16),
-    marginBottom: verticalScale(24),
-  },
-  logoContainer: {
-    width: moderateScale(40),
-    height: moderateScale(40),
-    borderRadius: moderateScale(20),
-    backgroundColor: Colors.primaryContainer,
+    backgroundColor: '#f8fafa',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  brandName: {
-    fontFamily: 'Manrope_800ExtraBold',
-    fontSize: moderateScale(24),
-    color: Colors.onSurface,
-    letterSpacing: moderateScale(-0.5),
-  },
-  heroWrapper: {
-    position: 'relative',
-    marginBottom: verticalScale(40),
-  },
-  heroGlow: {
+  backgroundGlow: {
     position: 'absolute',
-    top: moderateScale(-16),
-    left: moderateScale(-16),
-    right: moderateScale(-16),
-    bottom: moderateScale(-16),
-    backgroundColor: 'rgba(120, 214, 213, 0.2)', // primary-fixed-dim
-    borderRadius: moderateScale(24),
+    top: 0,
+    left: 0,
+    right: 0,
+    height: verticalScale(300),
+    backgroundColor: 'rgba(120, 214, 213, 0.1)',
   },
-  heroContainer: {
-    width: '100%',
-    aspectRatio: 16 / 9,
+  card: {
+    width: '90%',
+    backgroundColor: Colors.surfaceContainerLowest,
+    borderRadius: moderateScale(40),
+    padding: moderateScale(32),
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: verticalScale(10) },
+    shadowOpacity: 0.05,
+    shadowRadius: moderateScale(30),
+    elevation: 5,
+  },
+  logoWrapper: {
+    marginBottom: verticalScale(24),
+  },
+  logoContainer: {
+    width: moderateScale(56),
+    height: moderateScale(56),
     borderRadius: moderateScale(16),
-    overflow: 'hidden',
-    backgroundColor: Colors.surfaceContainerLow,
-  },
-  heroImage: {
-    width: '100%',
-    height: '100%',
-    opacity: 0.8,
-  },
-  heroOverlay: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  content: {
-    flex: 1,
+    backgroundColor: '#f2f4f4',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
-    fontFamily: 'Manrope_800ExtraBold',
+    fontFamily: Platform.OS === 'ios' ? 'System' : 'sans-serif-condensed',
+    fontWeight: '800',
     fontSize: moderateScale(36),
     color: Colors.onSurface,
-    lineHeight: moderateScale(44),
+    lineHeight: moderateScale(42),
     marginBottom: verticalScale(16),
-    letterSpacing: moderateScale(-1),
   },
   subtitle: {
-    fontFamily: 'Inter_400Regular',
-    fontSize: moderateScale(18),
+    fontFamily: Platform.OS === 'ios' ? 'System' : 'sans-serif',
+    fontSize: moderateScale(16),
     color: Colors.onSurfaceVariant,
-    lineHeight: moderateScale(28),
-    maxWidth: moderateScale(280),
+    lineHeight: moderateScale(24),
     marginBottom: verticalScale(32),
   },
-  formContainer: {
-    gap: verticalScale(24),
-    marginBottom: verticalScale(32),
-  },
-  inputGroup: {
-    gap: verticalScale(8),
-  },
-  inputLabel: {
-    fontFamily: 'Inter_500Medium',
-    fontSize: moderateScale(14),
-    color: Colors.onSurfaceVariant,
-    marginLeft: moderateScale(4),
-  },
-  inputWrapper: {
+  tabContainer: {
     flexDirection: 'row',
+    backgroundColor: '#f2f4f4',
+    borderRadius: moderateScale(20),
+    padding: moderateScale(4),
+    marginBottom: verticalScale(40),
+  },
+  tab: {
+    flex: 1,
+    paddingVertical: verticalScale(14),
     alignItems: 'center',
-    backgroundColor: Colors.surfaceContainerHighest,
     borderRadius: moderateScale(16),
-    height: verticalScale(64),
-    paddingHorizontal: moderateScale(20),
-    shadowColor: '#191c1d',
-    shadowOffset: { width: 0, height: moderateScale(4) },
-    shadowOpacity: 0.05,
-    shadowRadius: moderateScale(10),
+  },
+  activeTab: {
+    backgroundColor: Colors.surfaceContainerLowest,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: verticalScale(2) },
+    shadowOpacity: 0.1,
+    shadowRadius: moderateScale(4),
     elevation: 2,
   },
-  prefix: {
-    fontFamily: 'Inter_500Medium',
+  tabText: {
     fontSize: moderateScale(16),
-    color: 'rgba(62, 73, 73, 0.6)',
-    marginRight: moderateScale(12),
+    fontWeight: '600',
+    color: Colors.onSurfaceVariant,
+  },
+  activeTabText: {
+    color: Colors.onSurface,
+  },
+  formContainer: {
+    width: '100%',
+  },
+  inputLabel: {
+    fontSize: moderateScale(14),
+    fontWeight: '600',
+    color: Colors.onSurfaceVariant,
+    marginBottom: verticalScale(8),
+  },
+  phoneInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#e6e8e9',
+    borderRadius: moderateScale(4),
+    height: verticalScale(56),
+    marginBottom: verticalScale(40),
+  },
+  countryCodeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: moderateScale(16),
+    gap: moderateScale(8),
+    height: '100%',
+  },
+  countryCode: {
+    fontSize: moderateScale(16),
+    fontWeight: '600',
+    color: Colors.onSurface,
+  },
+  divider: {
+    width: 1,
+    height: '60%',
+    backgroundColor: 'rgba(0,0,0,0.1)',
   },
   input: {
     flex: 1,
-    fontFamily: 'Inter_400Regular',
-    fontSize: moderateScale(18),
+    paddingHorizontal: moderateScale(16),
+    fontSize: moderateScale(16),
     color: Colors.onSurface,
-    height: '100%',
   },
   button: {
-    marginTop: verticalScale(8),
+    backgroundColor: Colors.primary,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: verticalScale(18),
+    borderRadius: moderateScale(4),
+    gap: moderateScale(12),
+    marginBottom: verticalScale(48),
+  },
+  buttonText: {
+    color: Colors.onPrimary,
+    fontSize: moderateScale(18),
+    fontWeight: '700',
   },
   footer: {
-    alignItems: 'center',
-    gap: verticalScale(24),
-  },
-  securityBadge: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: moderateScale(12),
-    paddingHorizontal: moderateScale(20),
-    paddingVertical: verticalScale(12),
-    backgroundColor: Colors.surfaceContainerLow,
-    borderRadius: moderateScale(24),
+    borderTopWidth: 1,
+    borderTopColor: '#f2f4f4',
+    paddingTop: verticalScale(24),
   },
-  securityText: {
-    fontFamily: 'Inter_500Medium',
+  footerText: {
     fontSize: moderateScale(14),
-    color: Colors.onSurfaceVariant,
+    color: '#8d4a26',
+    flex: 1,
+    lineHeight: moderateScale(20),
   },
-  disclaimer: {
-    fontFamily: 'Inter_400Regular',
-    fontSize: moderateScale(12),
-    color: 'rgba(62, 73, 73, 0.6)',
-    textAlign: 'center',
-    maxWidth: moderateScale(240),
-    lineHeight: moderateScale(18),
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'flex-end',
   },
-  link: {
-    textDecorationLine: 'underline',
+  modalContent: {
+    backgroundColor: Colors.surface,
+    borderTopLeftRadius: moderateScale(24),
+    borderTopRightRadius: moderateScale(24),
+    height: SCREEN_HEIGHT * 0.8,
+    padding: moderateScale(24),
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: verticalScale(24),
+  },
+  modalTitle: {
+    fontSize: moderateScale(20),
+    fontWeight: '700',
+    color: Colors.onSurface,
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.surfaceContainerHigh,
+    borderRadius: moderateScale(12),
+    paddingHorizontal: moderateScale(16),
+    height: verticalScale(48),
+    marginBottom: verticalScale(16),
+    gap: moderateScale(12),
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: moderateScale(16),
+    color: Colors.onSurface,
+  },
+  countryList: {
+    paddingBottom: verticalScale(40),
+  },
+  countryItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: verticalScale(16),
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.surfaceContainer,
+  },
+  countryName: {
+    fontSize: moderateScale(16),
+    color: Colors.onSurface,
+    flex: 1,
+  },
+  countryDialCode: {
+    fontSize: moderateScale(16),
+    fontWeight: '600',
+    color: Colors.primary,
   },
 });
+
+
